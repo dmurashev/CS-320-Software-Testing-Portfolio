@@ -1,22 +1,14 @@
-# CS-320 Software Testing Portfolio (Java + JUnit 5)
+# Contact Service (Java + JUnit 5)
 
-This repository contains three simple in-memory backend services for a mobile application (no database, no UI):
+This project implements a simple in-memory **Contact Service** for a mobile application (no database, no UI).
 
-- **Contact Service**
-- **Task Service**
-- **Appointment Service**
+It includes a `Contact` model with strict field validation and a `ContactService` class that supports **add**, **delete**, and **update** operations by contact ID.
 
-Each service includes a domain model with strict field validation and a corresponding service class that supports controlled **add**, **delete**, and **update** operations by ID.
-
-The repository also includes the **Project Two Summary and Reflections Report** documenting testing strategy and professional growth.
+This repository also includes the **Project Two Summary and Reflections Report**, which documents my testing strategy and professional growth in software testing and quality assurance.
 
 ---
 
-## Contact Service
-
-Implements a validation-focused contact management component.
-
-### Features
+## Features
 - Add contacts with a **unique contact ID**
 - Delete contacts by **contact ID**
 - Update contact fields by **contact ID**:
@@ -26,7 +18,9 @@ Implements a validation-focused contact management component.
     - `address`
 - Full **JUnit 5** unit test coverage for validation and service behavior
 
-### Validation Rules (Contact)
+---
+
+## Validation Rules (Contact)
 - `contactId`: required, max 10 characters, not updatable
 - `firstName`: required, max 10 characters
 - `lastName`: required, max 10 characters
@@ -35,61 +29,22 @@ Implements a validation-focused contact management component.
 
 ---
 
-## Task Service
-
-Implements task tracking with strict validation rules.
-
-### Features
-- Add tasks with a **unique task ID**
-- Delete tasks by **task ID**
-- Update task fields by **task ID**:
-    - `name`
-    - `description`
-- Full **JUnit 5** unit test coverage
-
-### Validation Rules (Task)
-- `taskId`: required, max 10 characters, not updatable
-- `name`: required, max 20 characters
-- `description`: required, max 50 characters
-
----
-
-## Appointment Service
-
-Implements appointment scheduling with time-based validation.
-
-### Features
-- Add appointments with a **unique appointment ID**
-- Delete appointments by **appointment ID**
-- Validation enforced on creation
-- Full **JUnit 5** unit test coverage
-
-### Validation Rules (Appointment)
-- `appointmentId`: required, max 10 characters, not updatable
-- `appointmentDate`: required, must not be in the past
-- `description`: required, max 50 characters
-
----
-
 ## Error Handling
-
-Each domain uses structured runtime exceptions:
+The service uses structured runtime exceptions to ensure predictable system behavior:
 
 - `ValidationException`
 - `DuplicateIdException`
 - `NotFoundException`
 
-These ensure:
-- Required fields are not null
-- Field lengths do not exceed limits
-- IDs remain unique
-- Dates meet logical constraints
-- Invalid operations fail predictably
+These exceptions are thrown when:
+- Required fields are null or invalid
+- Field lengths exceed defined limits
+- Duplicate IDs are added
+- Delete or update operations target non-existing records
 
 ---
 
 ## Testing Strategy
-
 Testing was requirement-driven and focused on correctness and robustness.
 
 - **Boundary value analysis**
@@ -99,7 +54,7 @@ Testing was requirement-driven and focused on correctness and robustness.
 - Positive path verification using `assertEquals()`
 - Branch coverage validation
 
-The project achieves **80%+ test coverage**, with strong emphasis on validation-heavy code paths.
+The project achieves **80%+ unit test coverage**, with strong emphasis on validation logic and defensive programming.
 
 ---
 
@@ -111,47 +66,31 @@ The project achieves **80%+ test coverage**, with strong emphasis on validation-
 ---
 
 ## Files
-
-### Contact Service
 - `Contact.java`
 - `ContactService.java`
 - `ContactTest.java`
 - `ContactServiceTest.java`
-
-### Task Service
-- `Task.java`
-- `TaskService.java`
-- `TaskTest.java`
-- `TaskServiceTest.java`
-
-### Appointment Service
-- `Appointment.java`
-- `AppointmentService.java`
-- `AppointmentTest.java`
-- `AppointmentServiceTest.java`
-
-### Project Two
 - `CS320_ProjectTwo_Summary_and_Reflections.docx`
 
 ---
 
-## Reflection
+# Reflection
 
-### How can I ensure that my code, program, or software is functional and secure?
+## How can I ensure that my code, program, or software is functional and secure?
 
-I ensure functionality and security by translating documented requirements directly into validation logic and corresponding unit tests. Every constraint—such as maximum field lengths, immutable identifiers, uniqueness enforcement, and future-date validation—was implemented as explicit rules and verified through automated tests.
+I ensure functionality and security by translating documented requirements directly into validation logic and corresponding unit tests. Every constraint—such as maximum field lengths, immutable identifiers, and uniqueness enforcement—was implemented as explicit validation rules and verified through automated testing.
 
-By applying boundary value analysis and negative testing, I confirm that valid input is accepted and invalid input is rejected safely. Testing both success and failure paths reduces regression risk and increases reliability.
-
----
-
-### How do I interpret user needs and incorporate them into a program?
-
-I interpret user needs by converting written specifications into enforceable constraints within the domain model. Each requirement becomes both a validation rule and a test case. This requirement-to-test traceability ensures that all documented constraints are implemented precisely and verified systematically.
+By applying boundary value analysis and negative testing, I confirm that valid input is accepted and invalid input is rejected safely. Testing both success and failure paths reduces regression risk and increases long-term reliability.
 
 ---
 
-### How do I approach designing software?
+## How do I interpret user needs and incorporate them into a program?
+
+I interpret user needs by converting written specifications into enforceable validation logic within the domain model. Each requirement becomes both a rule in the code and a test case verifying compliance. This requirement-to-test traceability ensures that all documented constraints are implemented precisely and systematically verified.
+
+---
+
+## How do I approach designing software?
 
 I approach software design with structured layering and disciplined validation:
 
@@ -160,4 +99,4 @@ I approach software design with structured layering and disciplined validation:
 - Enforce immutability where system integrity requires it
 - Design components to be easily unit tested
 
-Even in a simple in-memory architecture, I apply production-oriented discipline: strict validation, controlled exception handling, and systematic automated testing.
+Even in a simple in-memory architecture, I apply production-oriented discipline: strict validation, controlled exception handling, and systematic automated testing to ensure reliable behavior.
